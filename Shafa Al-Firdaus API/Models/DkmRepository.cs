@@ -70,7 +70,7 @@ namespace Shafa_Al_Firdaus_API.Models
             return anggotaModel;
         }
 
-        public void insertData(DkmModel dkmModel)
+        /*public void insertData(DkmModel dkmModel)
         {
             try
             {
@@ -87,7 +87,7 @@ namespace Shafa_Al_Firdaus_API.Models
             {
                 Console.WriteLine(e.Message);
             }
-        }
+        }*/
 
         public void updateData(DkmModel dkmModel)
         {
@@ -109,13 +109,13 @@ namespace Shafa_Al_Firdaus_API.Models
             }
         }
 
-        public void deleteData(int id)
+        /*public void deleteData(string username)
         {
             try
             {
-                string query = "DELETE FROM Anggota WHERE id = @p1";
+                string query = "DELETE FROM dkm WHERE username = @p1";
                 using SqlCommand command = new SqlCommand(query, _connection);
-                command.Parameters.AddWithValue("@p1", id);
+                command.Parameters.AddWithValue("@p1", username);
 
                 _connection.Open();
                 command.ExecuteNonQuery();
@@ -125,6 +125,6 @@ namespace Shafa_Al_Firdaus_API.Models
             {
                 Console.WriteLine(e.Message);
             }
-        }
+        }*/
     }
 }
