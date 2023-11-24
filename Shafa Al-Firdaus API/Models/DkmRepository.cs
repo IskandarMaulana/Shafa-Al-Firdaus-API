@@ -49,7 +49,7 @@ namespace Shafa_Al_Firdaus_API.Models
             DkmModel anggotaModel = new DkmModel();
             try
             {
-                string query = "SELECT * FROM skm WHERE username = @p1";
+                string query = "SELECT * FROM dkm WHERE username = @p1";
                 SqlCommand command = new SqlCommand(query, _connection);
                 command.Parameters.AddWithValue("@p1", username);
                 _connection.Open();

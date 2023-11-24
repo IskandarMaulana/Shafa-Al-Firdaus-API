@@ -21,7 +21,7 @@ namespace Shafa_Al_Firdaus_API.Models
 
             try
             {
-                string query = "SELECT * FROM dkm";
+                string query = "SELECT * FROM petugas_harian";
                 SqlCommand command = new SqlCommand(query, _connection);
                 _connection.Open();
 
@@ -48,14 +48,14 @@ namespace Shafa_Al_Firdaus_API.Models
             return petugasList;
         }
 
-        public PetugasHarianModel getData(string username)
+        public PetugasHarianModel getData(string nim)
         {
             PetugasHarianModel petugasModel = new PetugasHarianModel();
             try
             {
-                string query = "SELECT * FROM skm WHERE username = @p1";
+                string query = "SELECT * FROM petugas_harian WHERE nim = @p1";
                 SqlCommand command = new SqlCommand(query, _connection);
-                command.Parameters.AddWithValue("@p1", username);
+                command.Parameters.AddWithValue("@p1", nim);
                 _connection.Open();
 
                 SqlDataReader reader = command.ExecuteReader();
