@@ -6,24 +6,24 @@ namespace Shafa_Al_Firdaus_API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class PetugasHarianController : Controller
+    public class PengumumanController : Controller
     {
-        private readonly PetugasHarianRepository _petugasrepository;
+        private readonly PengumumanRepository _pengumumanRepository;
         ResponseModel response = new ResponseModel();
 
-        public PetugasHarianController(IConfiguration configuration)
+        public PengumumanController(IConfiguration configuration)
         {
-            _petugasrepository = new PetugasHarianRepository(configuration);
+            _pengumumanRepository = new PengumumanRepository(configuration);
         }
 
-        [HttpGet("/GetAllPetugasHarian", Name = "GetAllPetugasHarian")]
-        public IActionResult GetAllPetugasHarian()
+        [HttpGet("/GetAllPengumuman", Name = "GetAllPengumuman")]
+        public IActionResult GetAllPengumuman()
         {
             try
             {
                 response.status = 200;
                 response.message = "Success";
-                response.data = _petugasrepository.getAllData();
+                response.data = _pengumumanRepository.getAllData();
             }
             catch (Exception ex)
             {
@@ -33,14 +33,14 @@ namespace Shafa_Al_Firdaus_API.Controllers
             return Ok(response);
         }
 
-        [HttpGet("/GetPetugasHarian", Name = "GetPetugasHarian")]
-        public IActionResult GetPetugasHarian(string nim)
+        [HttpGet("/GetPengumuman", Name = "GetPengumuman")]
+        public IActionResult GetPengumuman(string id_pengumuman)
         {
             try
             {
                 response.status = 200;
                 response.message = "Success";
-                response.data = _petugasrepository.getData(nim);
+                response.data = _pengumumanRepository.getData(id_pengumuman);
             }
             catch (Exception ex)
             {
@@ -49,38 +49,16 @@ namespace Shafa_Al_Firdaus_API.Controllers
             }
             return Ok(response);
         }
-        [HttpPost("/InsertPetugasHarian", Name = "InsertPetugasHarian")]
-        public IActionResult InsertPetugasHarian([FromBody] PetugasHarianModel petugasHarianModel)
+        [HttpPost("/InsertPengumuman", Name = "InsertPengumuman")]
+        public IActionResult InsertPengumuman([FromBody] PengumumanModel jadwalPetugasHarianModel)
         {
             try
             {
                 response.status = 200;
                 response.message = "Success";
-                _petugasrepository.insertData(petugasHarianModel);
-            }
-            catch (Exception ex)
-            {
-                response.status = 500;
-                response.message = "Failed " + ex.Message.ToString();
-            }
-            return Ok(response);
-        }
-        [HttpPut("/UpdatePetugasHarian", Name = "UpdatePetugasHarian")]
-        public IActionResult UpdateDkm([FromBody] PetugasHarianModel petugasHarianModel)
-        {
-            PetugasHarianModel petugas = new PetugasHarianModel();
 
-            petugas.nim = petugasHarianModel.nim;
-            petugas.nama = petugasHarianModel.nama;
-            petugas.prodi = petugasHarianModel.prodi;
-            petugas.nomor_telepon = petugasHarianModel.nomor_telepon;
-            petugas.status = petugasHarianModel.status;
-
-            try
-            {
-                response.status = 200;
-                response.message = "Success";
-                _petugasrepository.updateData(petugas);
+                jadwalPetugasHarianModel.id_pengumuman = Guid.NewGuid();
+                _pengumumanRepository.insertData(jadwalPetugasHarianModel);
             }
             catch (Exception ex)
             {
@@ -89,14 +67,39 @@ namespace Shafa_Al_Firdaus_API.Controllers
             }
             return Ok(response);
         }
-        [HttpDelete("/DeletePetugasHarian", Name = "DeletePetugasHarian")]
-        public IActionResult DeletePetugasHarian(string nim)
+        [HttpPut("/UpdatePengumuman", Name = "UpdatePengumuman")]
+        public IActionResult UpdateDkm([FromBody] PengumumanModel jadwalPetugasHarianModel)
+        {
+            PengumumanModel jadwal = new PengumumanModel();
+
+            jadwal.id_pengumuman = jadwalPetugasHarianModel.id_pengumuman;
+            jadwal.judul = jadwalPetugasHarianModel.judul;
+            jadwal.jenis = jadwalPetugasHarianModel.jenis;
+            jadwal.isi = jadwalPetugasHarianModel.isi;
+            jadwal.tanggal_mulai = jadwalPetugasHarianModel.tanggal_mulai;
+            jadwal.tanggal_selesai = jadwalPetugasHarianModel.tanggal_selesai;
+
+            try
+            {
+                response.status = 200;
+                response.message = "Success";
+                _pengumumanRepository.updateData(jadwal);
+            }
+            catch (Exception ex)
+            {
+                response.status = 500;
+                response.message = "Failed " + ex.Message.ToString();
+            }
+            return Ok(response);
+        }
+        [HttpDelete("/DeletePengumuman", Name = "DeletePengumuman")]
+        public IActionResult DeletePengumuman(string id_pengumuman)
         {
             try
             {
                 response.status = 200;
                 response.message = "Success";
-                _petugasrepository.deleteData(nim);
+                _pengumumanRepository.deleteData(id_pengumuman);
             }
             catch (Exception ex)
             {

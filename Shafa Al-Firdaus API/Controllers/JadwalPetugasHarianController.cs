@@ -4,6 +4,8 @@ using Shafa_Al_Firdaus_API.Models;
 
 namespace Shafa_Al_Firdaus_API.Controllers
 {
+    [ApiController]
+    [Route("[controller]")]
     public class JadwalPetugasHarianController : Controller
     {
         private readonly JadwalPetugasHarianRepository _jadwalRepository;
