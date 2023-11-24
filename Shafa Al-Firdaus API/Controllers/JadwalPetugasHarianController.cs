@@ -48,13 +48,15 @@ namespace Shafa_Al_Firdaus_API.Controllers
             return Ok(response);
         }
         [HttpPost("/InsertJadwalPetugasHarian", Name = "InsertJadwalPetugasHarian")]
-        public IActionResult InsertJadwalPetugasHarian([FromBody] JadwalPetugasHarianModel petugasHarianModel)
+        public IActionResult InsertJadwalPetugasHarian([FromBody] JadwalPetugasHarianModel jadwalPetugasHarianModel)
         {
             try
             {
                 response.status = 200;
                 response.message = "Success";
-                _jadwalRepository.insertData(petugasHarianModel);
+
+                jadwalPetugasHarianModel.id_jadwal = Guid.NewGuid();
+                _jadwalRepository.insertData(jadwalPetugasHarianModel);
             }
             catch (Exception ex)
             {
@@ -64,21 +66,21 @@ namespace Shafa_Al_Firdaus_API.Controllers
             return Ok(response);
         }
         [HttpPut("/UpdateJadwalPetugasHarian", Name = "UpdateJadwalPetugasHarian")]
-        public IActionResult UpdateDkm([FromBody] JadwalPetugasHarianModel petugasHarianModel)
+        public IActionResult UpdateDkm([FromBody] JadwalPetugasHarianModel jadwalPetugasHarianModel)
         {
-            JadwalPetugasHarianModel petugas = new JadwalPetugasHarianModel();
+            JadwalPetugasHarianModel jadwal = new JadwalPetugasHarianModel();
 
-            petugas.id_jadwal = petugasHarianModel.id_jadwal;
-            petugas.nim = petugasHarianModel.nim;
-            petugas.tanggal = petugasHarianModel.tanggal;
-            petugas.waktu = petugasHarianModel.waktu;
-            petugas.tugas = petugasHarianModel.tugas;
+            jadwal.id_jadwal = jadwalPetugasHarianModel.id_jadwal;
+            jadwal.nim = jadwalPetugasHarianModel.nim;
+            jadwal.tanggal = jadwalPetugasHarianModel.tanggal;
+            jadwal.waktu = jadwalPetugasHarianModel.waktu;
+            jadwal.tugas = jadwalPetugasHarianModel.tugas;
 
             try
             {
                 response.status = 200;
                 response.message = "Success";
-                _jadwalRepository.updateData(petugas);
+                _jadwalRepository.updateData(jadwal);
             }
             catch (Exception ex)
             {
@@ -88,13 +90,13 @@ namespace Shafa_Al_Firdaus_API.Controllers
             return Ok(response);
         }
         [HttpDelete("/DeleteJadwalPetugasHarian", Name = "DeleteJadwalPetugasHarian")]
-        public IActionResult DeleteJadwalPetugasHarian(string nim)
+        public IActionResult DeleteJadwalPetugasHarian(string id_jadwal)
         {
             try
             {
                 response.status = 200;
                 response.message = "Success";
-                _jadwalRepository.deleteData(nim);
+                _jadwalRepository.deleteData(id_jadwal);
             }
             catch (Exception ex)
             {

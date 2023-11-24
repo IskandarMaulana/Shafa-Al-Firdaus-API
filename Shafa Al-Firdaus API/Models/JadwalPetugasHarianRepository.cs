@@ -30,7 +30,7 @@ namespace Shafa_Al_Firdaus_API.Models
                 {
                     JadwalPetugasHarianModel petugas = new JadwalPetugasHarianModel
                     {
-                        id_jadwal = reader["id_jadwal"].ToString(),
+                        id_jadwal = Guid.Parse(reader["id_jadwal"].ToString()),
                         nim = reader["nim"].ToString(),
                         tanggal = Convert.ToDateTime(reader["tanggal"].ToString()),
                         waktu = reader["waktu"].ToString(),
@@ -61,7 +61,7 @@ namespace Shafa_Al_Firdaus_API.Models
                 SqlDataReader reader = command.ExecuteReader();
                 reader.Read();
 
-                jadwalModel.id_jadwal = reader["id_jadwal"].ToString();
+                jadwalModel.id_jadwal = Guid.Parse(reader["id_jadwal"].ToString());
                 jadwalModel.nim = reader["nim"].ToString();
                 jadwalModel.tanggal = Convert.ToDateTime(reader["tanggal"].ToString());
                 jadwalModel.waktu = reader["waktu"].ToString();
