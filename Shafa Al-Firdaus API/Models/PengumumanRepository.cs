@@ -52,7 +52,7 @@ namespace Shafa_Al_Firdaus_API.Models
 
         public PengumumanModel getData(string id_pengumuman)
         {
-            PengumumanModel jadwalModel = new PengumumanModel();
+            PengumumanModel pengumumanModel = new PengumumanModel();
             try
             {
                 string query = "SELECT * FROM pengumuman WHERE id_pengumuman = @p1";
@@ -63,12 +63,12 @@ namespace Shafa_Al_Firdaus_API.Models
                 SqlDataReader reader = command.ExecuteReader();
                 reader.Read();
 
-                jadwalModel.id_pengumuman = Guid.Parse(reader["id_pengumuman"].ToString());
-                jadwalModel.judul = reader["judul"].ToString();
-                jadwalModel.jenis = Convert.ToInt32(reader["jenis"].ToString());
-                jadwalModel.isi = reader["isi"].ToString();
-                jadwalModel.tanggal_mulai = Convert.ToDateTime(reader["tanggal_mulai"].ToString());
-                jadwalModel.tanggal_selesai = Convert.ToDateTime(reader["tanggal_selesai"].ToString());
+                pengumumanModel.id_pengumuman = Guid.Parse(reader["id_pengumuman"].ToString());
+                pengumumanModel.judul = reader["judul"].ToString();
+                pengumumanModel.jenis = Convert.ToInt32(reader["jenis"].ToString());
+                pengumumanModel.isi = reader["isi"].ToString();
+                pengumumanModel.tanggal_mulai = Convert.ToDateTime(reader["tanggal_mulai"].ToString()).Date;
+                pengumumanModel.tanggal_selesai = Convert.ToDateTime(reader["tanggal_selesai"].ToString()).Date;
 
                 reader.Close();
                 _connection.Close();
@@ -77,7 +77,7 @@ namespace Shafa_Al_Firdaus_API.Models
             {
                 Console.WriteLine(ex.Message);
             }
-            return jadwalModel;
+            return pengumumanModel;
         }
 
         public void insertData(PengumumanModel pengumumanModel)
