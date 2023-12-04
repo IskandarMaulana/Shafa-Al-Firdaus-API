@@ -73,10 +73,11 @@ namespace Shafa_Al_Firdaus_API.Controllers
             JadwalPetugasHarianModel jadwal = new JadwalPetugasHarianModel();
 
             jadwal.id_jadwal = jadwalPetugasHarianModel.id_jadwal;
-            jadwal.nim = jadwalPetugasHarianModel.nim;
+            jadwal.kode = jadwalPetugasHarianModel.kode;
             jadwal.tanggal = jadwalPetugasHarianModel.tanggal;
             jadwal.waktu = jadwalPetugasHarianModel.waktu;
             jadwal.tugas = jadwalPetugasHarianModel.tugas;
+            jadwal.status = jadwalPetugasHarianModel.status;
 
             try
             {

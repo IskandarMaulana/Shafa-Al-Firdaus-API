@@ -31,10 +31,11 @@ namespace Shafa_Al_Firdaus_API.Models
                     JadwalPetugasHarianModel petugas = new JadwalPetugasHarianModel
                     {
                         id_jadwal = Guid.Parse(reader["id_jadwal"].ToString()),
-                        nim = reader["nim"].ToString(),
+                        kode = reader["kode"].ToString(),
                         tanggal = Convert.ToDateTime(reader["tanggal"].ToString()),
                         waktu = reader["waktu"].ToString(),
-                        tugas = reader["tugas"].ToString()
+                        tugas = reader["tugas"].ToString(),
+                        status = Convert.ToInt32(reader["status"].ToString())
                     };
                     jadwalList.Add(petugas);
                 }
@@ -62,10 +63,11 @@ namespace Shafa_Al_Firdaus_API.Models
                 reader.Read();
 
                 jadwalModel.id_jadwal = Guid.Parse(reader["id_jadwal"].ToString());
-                jadwalModel.nim = reader["nim"].ToString();
+                jadwalModel.kode = reader["kode"].ToString();
                 jadwalModel.tanggal = Convert.ToDateTime(reader["tanggal"].ToString());
                 jadwalModel.waktu = reader["waktu"].ToString();
                 jadwalModel.tugas = reader["tugas"].ToString();
+                jadwalModel.status = Convert.ToInt32(reader["status"].ToString());
 
                 reader.Close();
                 _connection.Close();
@@ -81,13 +83,14 @@ namespace Shafa_Al_Firdaus_API.Models
         {
             try
             {
-                string query = "INSERT INTO jadwal_petugas_harian VALUES (@p1, @p2, @p3, @p4, @p5)";
+                string query = "INSERT INTO jadwal_petugas_harian VALUES (@p1, @p2, @p3, @p4, @p5, @p6)";
                 SqlCommand command = new SqlCommand(query, _connection);
                 command.Parameters.AddWithValue("@p1", jadwalPetugasHarianModel.id_jadwal);
-                command.Parameters.AddWithValue("@p2", jadwalPetugasHarianModel.nim);
+                command.Parameters.AddWithValue("@p2", jadwalPetugasHarianModel.kode);
                 command.Parameters.AddWithValue("@p3", jadwalPetugasHarianModel.tanggal);
                 command.Parameters.AddWithValue("@p4", jadwalPetugasHarianModel.waktu);
                 command.Parameters.AddWithValue("@p5", jadwalPetugasHarianModel.tugas);
+                command.Parameters.AddWithValue("@p6", jadwalPetugasHarianModel.status);
 
                 _connection.Open();
                 command.ExecuteNonQuery();
@@ -103,14 +106,15 @@ namespace Shafa_Al_Firdaus_API.Models
         {
             try
             {
-                string query = "UPDATE jadwal_petugas_harian SET nim = @p2, tanggal = @p3, waktu = @p4, tugas = @p5 WHERE id_jadwal = @p1";
+                string query = "UPDATE jadwal_petugas_harian SET kode = @p2, tanggal = @p3, waktu = @p4, tugas = @p5 WHERE id_jadwal = @p1";
 
                 using SqlCommand command = new SqlCommand(query, _connection);
                 command.Parameters.AddWithValue("@p1", jadwalPetugasHarianModel.id_jadwal);
-                command.Parameters.AddWithValue("@p2", jadwalPetugasHarianModel.nim);
+                command.Parameters.AddWithValue("@p2", jadwalPetugasHarianModel.kode);
                 command.Parameters.AddWithValue("@p3", jadwalPetugasHarianModel.tanggal);
                 command.Parameters.AddWithValue("@p4", jadwalPetugasHarianModel.waktu);
                 command.Parameters.AddWithValue("@p5", jadwalPetugasHarianModel.tugas);
+                command.Parameters.AddWithValue("@p6", jadwalPetugasHarianModel.status);
 
                 _connection.Open();
                 command.ExecuteNonQuery();

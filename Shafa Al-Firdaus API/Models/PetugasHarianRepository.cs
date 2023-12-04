@@ -30,9 +30,8 @@ namespace Shafa_Al_Firdaus_API.Models
                 {
                     PetugasHarianModel petugas = new PetugasHarianModel
                     {
-                        nim = reader["nim"].ToString(),
+                        kode = reader["kode"].ToString(),
                         nama = reader["nama"].ToString(),
-                        prodi = Convert.ToInt32(reader["prodi"].ToString()),
                         nomor_telepon = reader["nomor_telepon"].ToString(),
                         status = Convert.ToInt32(reader["status"].ToString())
                     };
@@ -48,22 +47,21 @@ namespace Shafa_Al_Firdaus_API.Models
             return petugasList;
         }
 
-        public PetugasHarianModel getData(string nim)
+        public PetugasHarianModel getData(string kode)
         {
             PetugasHarianModel petugasModel = new PetugasHarianModel();
             try
             {
-                string query = "SELECT * FROM petugas_harian WHERE nim = @p1";
+                string query = "SELECT * FROM petugas_harian WHERE kode = @p1";
                 SqlCommand command = new SqlCommand(query, _connection);
-                command.Parameters.AddWithValue("@p1", nim);
+                command.Parameters.AddWithValue("@p1", kode);
                 _connection.Open();
 
                 SqlDataReader reader = command.ExecuteReader();
                 reader.Read();
 
-                petugasModel.nim = reader["nim"].ToString();
+                petugasModel.kode = reader["kode"].ToString();
                 petugasModel.nama = reader["nama"].ToString();
-                petugasModel.prodi = Convert.ToInt32(reader["prodi"].ToString());
                 petugasModel.nomor_telepon = reader["nomor_telepon"].ToString();
                 petugasModel.status = Convert.ToInt32(reader["status"].ToString());
 
@@ -81,13 +79,12 @@ namespace Shafa_Al_Firdaus_API.Models
         {
             try
             {
-                string query = "INSERT INTO petugas_harian VALUES (@p1, @p2, @p3, @p4, @p5)";
+                string query = "INSERT INTO petugas_harian VALUES (@p1, @p2, @p3, @p4)";
                 SqlCommand command = new SqlCommand(query, _connection);
-                command.Parameters.AddWithValue("@p1", petugasHarianModel.nim);
+                command.Parameters.AddWithValue("@p1", petugasHarianModel.kode);
                 command.Parameters.AddWithValue("@p2", petugasHarianModel.nama);
-                command.Parameters.AddWithValue("@p3", petugasHarianModel.prodi);
-                command.Parameters.AddWithValue("@p4", petugasHarianModel.nomor_telepon);
-                command.Parameters.AddWithValue("@p5", petugasHarianModel.status);
+                command.Parameters.AddWithValue("@p3", petugasHarianModel.nomor_telepon);
+                command.Parameters.AddWithValue("@p4", petugasHarianModel.status);
 
                 _connection.Open();
                 command.ExecuteNonQuery();
@@ -103,14 +100,13 @@ namespace Shafa_Al_Firdaus_API.Models
         {
             try
             {
-                string query = "UPDATE petugas_harian SET nama = @p2, prodi = @p3, nomor_telepon = @p4, status = @p5 WHERE nim = @p1";
+                string query = "UPDATE petugas_harian SET nama = @p2, nomor_telepon = @p3, status = @p4 WHERE kode = @p1";
 
                 using SqlCommand command = new SqlCommand(query, _connection);
-                command.Parameters.AddWithValue("@p1", petugasHarianModel.nim);
+                command.Parameters.AddWithValue("@p1", petugasHarianModel.kode);
                 command.Parameters.AddWithValue("@p2", petugasHarianModel.nama);
-                command.Parameters.AddWithValue("@p3", petugasHarianModel.prodi);
-                command.Parameters.AddWithValue("@p4", petugasHarianModel.nomor_telepon);
-                command.Parameters.AddWithValue("@p5", petugasHarianModel.status);
+                command.Parameters.AddWithValue("@p3", petugasHarianModel.nomor_telepon);
+                command.Parameters.AddWithValue("@p4", petugasHarianModel.status);
 
                 _connection.Open();
                 command.ExecuteNonQuery();
@@ -122,13 +118,13 @@ namespace Shafa_Al_Firdaus_API.Models
             }
         }
 
-        public void deleteData(string nim)
+        public void deleteData(string kode)
         {
             try
             {
-                string query = "DELETE FROM petugas_harian WHERE nim = @p1";
+                string query = "DELETE FROM petugas_harian WHERE kode = @p1";
                 using SqlCommand command = new SqlCommand(query, _connection);
-                command.Parameters.AddWithValue("@p1", nim);
+                command.Parameters.AddWithValue("@p1", kode);
 
                 _connection.Open();
                 command.ExecuteNonQuery();

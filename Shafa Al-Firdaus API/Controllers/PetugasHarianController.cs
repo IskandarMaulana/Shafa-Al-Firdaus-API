@@ -34,13 +34,13 @@ namespace Shafa_Al_Firdaus_API.Controllers
         }
 
         [HttpGet("/GetPetugasHarian", Name = "GetPetugasHarian")]
-        public IActionResult GetPetugasHarian(string nim)
+        public IActionResult GetPetugasHarian(string kode)
         {
             try
             {
                 response.status = 200;
                 response.message = "Success";
-                response.data = _petugasrepository.getData(nim);
+                response.data = _petugasrepository.getData(kode);
             }
             catch (Exception ex)
             {
@@ -70,9 +70,8 @@ namespace Shafa_Al_Firdaus_API.Controllers
         {
             PetugasHarianModel petugas = new PetugasHarianModel();
 
-            petugas.nim = petugasHarianModel.nim;
+            petugas.kode = petugasHarianModel.kode;
             petugas.nama = petugasHarianModel.nama;
-            petugas.prodi = petugasHarianModel.prodi;
             petugas.nomor_telepon = petugasHarianModel.nomor_telepon;
             petugas.status = petugasHarianModel.status;
 
@@ -90,13 +89,13 @@ namespace Shafa_Al_Firdaus_API.Controllers
             return Ok(response);
         }
         [HttpDelete("/DeletePetugasHarian", Name = "DeletePetugasHarian")]
-        public IActionResult DeletePetugasHarian(string nim)
+        public IActionResult DeletePetugasHarian(string kode)
         {
             try
             {
                 response.status = 200;
                 response.message = "Success";
-                _petugasrepository.deleteData(nim);
+                _petugasrepository.deleteData(kode);
             }
             catch (Exception ex)
             {
