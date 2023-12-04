@@ -125,7 +125,25 @@ namespace Shafa_Al_Firdaus_API.Models
                 Console.WriteLine(e.Message);
             }
         }
+        public void updateStatus(string id_jadwal, int status)
+        {
+            try
+            {
+                string query = "UPDATE jadwal_petugas_harian SET status = @p2 WHERE id_jadwal = @p1";
 
+                using SqlCommand command = new SqlCommand(query, _connection);
+                command.Parameters.AddWithValue("@p1", id_jadwal);
+                command.Parameters.AddWithValue("@p2", status);
+
+                _connection.Open();
+                command.ExecuteNonQuery();
+                _connection.Close();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
         public void deleteData(string id_jadwal)
         {
             try
