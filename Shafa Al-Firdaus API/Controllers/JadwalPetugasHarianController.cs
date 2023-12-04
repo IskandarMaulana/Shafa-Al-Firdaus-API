@@ -50,24 +50,7 @@ namespace Shafa_Al_Firdaus_API.Controllers
             return Ok(response);
         }
 
-        [HttpPut("/UpdateStatus", Name = "UpdateStatus")]
-        public IActionResult UpdateStatus(string id_jadwal, int status)
-        {
-            JadwalPetugasHarianModel jadwal = new JadwalPetugasHarianModel();
-
-            try
-            {
-                response.status = 200;
-                response.message = "Success";
-                _jadwalRepository.updateStatus(id_jadwal, status);
-            }
-            catch (Exception ex)
-            {
-                response.status = 500;
-                response.message = "Failed " + ex.Message.ToString();
-            }
-            return Ok(response);
-        }
+        
 
         [HttpPost("/InsertJadwalPetugasHarian", Name = "InsertJadwalPetugasHarian")]
         public IActionResult InsertJadwalPetugasHarian([FromBody] JadwalPetugasHarianModel jadwalPetugasHarianModel)
@@ -79,6 +62,25 @@ namespace Shafa_Al_Firdaus_API.Controllers
 
                 jadwalPetugasHarianModel.id_jadwal = Guid.NewGuid();
                 _jadwalRepository.insertData(jadwalPetugasHarianModel);
+            }
+            catch (Exception ex)
+            {
+                response.status = 500;
+                response.message = "Failed " + ex.Message.ToString();
+            }
+            return Ok(response);
+        }
+
+        [HttpPut("/UpdateStatus", Name = "UpdateStatus")]
+        public IActionResult UpdateStatus(string id_jadwal, int status)
+        {
+            JadwalPetugasHarianModel jadwal = new JadwalPetugasHarianModel();
+
+            try
+            {
+                response.status = 200;
+                response.message = "Success";
+                _jadwalRepository.updateStatus(id_jadwal, status);
             }
             catch (Exception ex)
             {
