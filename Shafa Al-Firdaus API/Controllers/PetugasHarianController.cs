@@ -88,14 +88,14 @@ namespace Shafa_Al_Firdaus_API.Controllers
             }
             return Ok(response);
         }
-        [HttpDelete("/DeletePetugasHarian", Name = "DeletePetugasHarian")]
-        public IActionResult DeletePetugasHarian(string kode)
+        [HttpPatch("/UpdateStatusPetugasHarian", Name = "UpdateStatusPetugasHarian")]
+        public IActionResult UpdateStatusPetugasHarian(string kode, int newStatus)
         {
             try
             {
                 response.status = 200;
                 response.message = "Success";
-                _petugasrepository.deleteData(kode);
+                _petugasrepository.updateStatus(kode, newStatus);
             }
             catch (Exception ex)
             {
