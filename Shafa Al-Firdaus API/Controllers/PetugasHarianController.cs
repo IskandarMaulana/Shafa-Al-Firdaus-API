@@ -67,7 +67,7 @@ namespace Shafa_Al_Firdaus_API.Controllers
             return Ok(response);
         }
         [HttpPut("/UpdatePetugasHarian", Name = "UpdatePetugasHarian")]
-        public IActionResult UpdateDkm([FromBody] PetugasHarianModel petugasHarianModel)
+        public IActionResult UpdatePetugasHarian([FromBody] PetugasHarianModel petugasHarianModel)
         {
             PetugasHarianModel petugas = new PetugasHarianModel();
 
