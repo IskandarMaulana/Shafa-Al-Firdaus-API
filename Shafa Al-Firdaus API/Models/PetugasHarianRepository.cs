@@ -74,11 +74,43 @@ namespace Shafa_Al_Firdaus_API.Models
             }
             return petugasModel;
         }
-
+        public string autoId()
+        {
+            string newId = "";
+            string lastId = "";
+            try
+            {
+                
+                string query = "SELECT TOP 1 kode FROM petugas_harian ORDER BY kode DESC";
+                SqlCommand command = new SqlCommand(query, _connection);
+                using (var reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        lastId = reader[0].ToString();
+                        int numId = int.Parse(lastId.Substring(4, 6)) + 1;
+                        newId = "PTGS" + numId.ToString("D6");
+                        return newId;
+                    }
+                    else
+                    {
+                        newId = "PTGS000001";
+                        return newId;
+                    }
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return newId;
+        }
         public void insertData(PetugasHarianModel petugasHarianModel)
         {
             try
             {
+                petugasHarianModel.kode = autoId();
                 string query = "INSERT INTO petugas_harian VALUES (@p1, @p2, @p3, @p4)";
                 SqlCommand command = new SqlCommand(query, _connection);
                 command.Parameters.AddWithValue("@p1", petugasHarianModel.kode);
