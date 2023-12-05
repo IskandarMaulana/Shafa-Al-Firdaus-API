@@ -110,7 +110,6 @@ namespace Shafa_Al_Firdaus_API.Models
         {
             try
             {
-                petugasHarianModel.kode = autoId();
                 string query = "INSERT INTO petugas_harian VALUES (@p1, @p2, @p3, @p4)";
                 SqlCommand command = new SqlCommand(query, _connection);
                 command.Parameters.AddWithValue("@p1", petugasHarianModel.kode);

@@ -78,6 +78,7 @@ namespace Shafa_Al_Firdaus_API.Controllers
             jadwal.isi = jadwalPetugasHarianModel.isi;
             jadwal.tanggal_mulai = jadwalPetugasHarianModel.tanggal_mulai;
             jadwal.tanggal_selesai = jadwalPetugasHarianModel.tanggal_selesai;
+            jadwal.status = jadwalPetugasHarianModel.status;
 
             try
             {

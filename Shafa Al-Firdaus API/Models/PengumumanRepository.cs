@@ -35,7 +35,8 @@ namespace Shafa_Al_Firdaus_API.Models
                         jenis = Convert.ToInt32(reader["jenis"].ToString()),
                         isi = reader["isi"].ToString(),
                         tanggal_mulai = Convert.ToDateTime(reader["tanggal_mulai"].ToString()),
-                        tanggal_selesai = Convert.ToDateTime(reader["tanggal_selesai"].ToString())
+                        tanggal_selesai = Convert.ToDateTime(reader["tanggal_selesai"].ToString()),
+                         status = Convert.ToInt32(reader["status"].ToString())
 
                     };
                     pengumumanList.Add(petugas);
@@ -69,6 +70,7 @@ namespace Shafa_Al_Firdaus_API.Models
                 pengumumanModel.isi = reader["isi"].ToString();
                 pengumumanModel.tanggal_mulai = Convert.ToDateTime(reader["tanggal_mulai"].ToString()).Date;
                 pengumumanModel.tanggal_selesai = Convert.ToDateTime(reader["tanggal_selesai"].ToString()).Date;
+                pengumumanModel.status = Convert.ToInt32(reader["status"].ToString());
 
                 reader.Close();
                 _connection.Close();
@@ -84,7 +86,7 @@ namespace Shafa_Al_Firdaus_API.Models
         {
             try
             {
-                string query = "INSERT INTO pengumuman VALUES (@p1, @p2, @p3, @p4, @p5, @p6)";
+                string query = "INSERT INTO pengumuman VALUES (@p1, @p2, @p3, @p4, @p5, @p6, @7)";
                 SqlCommand command = new SqlCommand(query, _connection);
                 command.Parameters.AddWithValue("@p1", pengumumanModel.id_pengumuman);
                 command.Parameters.AddWithValue("@p2", pengumumanModel.judul);
@@ -92,6 +94,7 @@ namespace Shafa_Al_Firdaus_API.Models
                 command.Parameters.AddWithValue("@p4", pengumumanModel.isi);
                 command.Parameters.AddWithValue("@p5", pengumumanModel.tanggal_mulai);
                 command.Parameters.AddWithValue("@p6", pengumumanModel.tanggal_selesai);
+                command.Parameters.AddWithValue("@p7", pengumumanModel.status);
 
                 _connection.Open();
                 command.ExecuteNonQuery();
@@ -107,7 +110,7 @@ namespace Shafa_Al_Firdaus_API.Models
         {
             try
             {
-                string query = "UPDATE pengumuman SET judul = @p2, jenis = @p3, isi = @p4, tanggal_mulai = @p5, tanggal_selesai = @p6 WHERE id_pengumuman = @p1";
+                string query = "UPDATE pengumuman SET judul = @p2, jenis = @p3, isi = @p4, tanggal_mulai = @p5, tanggal_selesai = @p6, status = @p7 WHERE id_pengumuman = @p1";
 
                 using SqlCommand command = new SqlCommand(query, _connection);
                 command.Parameters.AddWithValue("@p1", pengumumanModel.id_pengumuman);
@@ -116,6 +119,7 @@ namespace Shafa_Al_Firdaus_API.Models
                 command.Parameters.AddWithValue("@p4", pengumumanModel.isi);
                 command.Parameters.AddWithValue("@p5", pengumumanModel.tanggal_mulai);
                 command.Parameters.AddWithValue("@p6", pengumumanModel.tanggal_selesai);
+                command.Parameters.AddWithValue("@p7", pengumumanModel.status);
 
                 _connection.Open();
                 command.ExecuteNonQuery();

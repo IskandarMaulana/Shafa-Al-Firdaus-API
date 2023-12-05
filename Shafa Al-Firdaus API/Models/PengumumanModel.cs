@@ -8,5 +8,7 @@
         public string isi { get; set; }
         public DateTime tanggal_mulai { get; set; }
         public DateTime tanggal_selesai { get; set; }
+
+        public int status { get; set; }
     }
 }
