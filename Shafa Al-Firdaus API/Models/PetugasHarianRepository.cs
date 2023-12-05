@@ -152,13 +152,15 @@ namespace Shafa_Al_Firdaus_API.Models
             }
         }
 
-        public void deleteData(string kode)
+        public void updateStatus(string kode, int newStatus)
         {
             try
             {
-                string query = "DELETE FROM petugas_harian WHERE kode = @p1";
+                string query = "UPDATE petugas_harian SET status = @p2 WHERE kode = @p1";
+
                 using SqlCommand command = new SqlCommand(query, _connection);
                 command.Parameters.AddWithValue("@p1", kode);
+                command.Parameters.AddWithValue("@p2", newStatus);
 
                 _connection.Open();
                 command.ExecuteNonQuery();
