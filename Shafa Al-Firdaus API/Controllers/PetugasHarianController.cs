@@ -49,10 +49,25 @@ namespace Shafa_Al_Firdaus_API.Controllers
             }
             return Ok(response);
         }
+        [HttpGet("/GetIdPetugasHarian", Name = "GetIdPetugasHarian")]
+        public IActionResult GetIdPetugasHarian()
+        {
+            try
+            {
+                response.status = 200;
+                response.message = "Success";
+                response.data = _petugasrepository.autoId();
+            }
+            catch (Exception ex)
+            {
+                response.status = 500;
+                response.message = "Failed " + ex.Message.ToString();
+            }
+            return Ok(response);
+        }
         [HttpPost("/InsertPetugasHarian", Name = "InsertPetugasHarian")]
         public IActionResult InsertPetugasHarian([FromBody] PetugasHarianModel petugasHarianModel)
         {
-            petugasHarianModel.kode = _petugasrepository.autoId();
             try
             {
                 response.status = 200;

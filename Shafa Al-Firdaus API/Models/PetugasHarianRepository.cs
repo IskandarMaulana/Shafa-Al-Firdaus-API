@@ -80,25 +80,28 @@ namespace Shafa_Al_Firdaus_API.Models
             string lastId = "";
             try
             {
-                
                 string query = "SELECT TOP 1 kode FROM petugas_harian ORDER BY kode DESC";
                 SqlCommand command = new SqlCommand(query, _connection);
-                using (var reader = command.ExecuteReader())
-                {
-                    if (reader.Read())
-                    {
-                        lastId = reader[0].ToString();
-                        int numId = int.Parse(lastId.Substring(4, 6)) + 1;
-                        newId = "PTGS" + numId.ToString("D6");
-                        return newId;
-                    }
-                    else
-                    {
-                        newId = "PTGS000001";
-                        return newId;
-                    }
-                }
+                _connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
                 
+                if (reader.Read())
+                {
+                    lastId = reader["kode"].ToString();
+                   
+                    int numId = int.Parse(lastId.Substring(4, 6)) + 1;
+                    
+                    newId = "PTGS" + numId.ToString("D6");
+                    
+                    return newId;
+                }
+                else
+                {
+                    newId = "PTGS000001";
+                    
+                    return newId;
+                }
             }
             catch (Exception ex)
             {
