@@ -52,6 +52,7 @@ namespace Shafa_Al_Firdaus_API.Controllers
         [HttpPost("/InsertPetugasHarian", Name = "InsertPetugasHarian")]
         public IActionResult InsertPetugasHarian([FromBody] PetugasHarianModel petugasHarianModel)
         {
+            petugasHarianModel.kode = _petugasrepository.autoId();
             try
             {
                 response.status = 200;
