@@ -13,16 +13,18 @@ namespace Shafa_Al_Firdaus_API.Models
         public string kode { get; set; }
 
         [Required(ErrorMessage = "Tanggal wajib diisi.")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd  HH:mm}")]
         [DataType(DataType.DateTime, ErrorMessage = "Format tanggal tidak valid.")]
-        [Range(typeof(DateTime), "1900-01-01", "9999-12-31", ErrorMessage = "Tanggal harus berada di antara 1900-01-01 dan 9999-12-31.")]
+        [Range(typeof(DateTime), "2000-01-01", "9999-12-31", ErrorMessage = "Tanggal harus berada di antara 2000-01-01 dan 9999-12-31.")]
         public DateTime tanggal { get; set; }
 
         [Required(ErrorMessage = "Waktu wajib diisi.")]
         [MaxLength(10, ErrorMessage = "Waktu maksimal 10 karakter.")]
+        [RegularExpression("^[a-zA-Z' ]*$", ErrorMessage = "Waktu hanya boleh berupa huruf, spasi, dan tanda tertentu (').")]
         public string waktu { get; set; }
 
         [Required(ErrorMessage = "Tugas wajib diisi.")]
-        [MaxLength(100, ErrorMessage = "Tugas maksimal 255 karakter.")]
+        [MaxLength(250, ErrorMessage = "Tugas maksimal 250 karakter.")]
         public string tugas { get; set; }
 
         [Required(ErrorMessage = "Status wajib diisi.")]

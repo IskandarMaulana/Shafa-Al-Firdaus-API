@@ -11,7 +11,7 @@ namespace Shafa_Al_Firdaus_API.Models
 
         [Required(ErrorMessage = "Nama Petugas wajib diisi.")]
         [MaxLength(50, ErrorMessage = "Nama Petugas maksimal 30 karakter.")]
-        [RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "Nama Petugas hanya boleh berupa huruf.")]
+        [RegularExpression("^[a-zA-Z' -]*$", ErrorMessage = "Nama Petugas hanya boleh berupa huruf, spasi, dan tanda tertentu ('-).")]
         public string nama { get; set; }
 
         [Required(ErrorMessage = "Nomor Telepon Petugas wajib diisi.")]
