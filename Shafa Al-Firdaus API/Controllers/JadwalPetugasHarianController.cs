@@ -71,16 +71,14 @@ namespace Shafa_Al_Firdaus_API.Controllers
             return Ok(response);
         }
 
-        [HttpPut("/UpdateStatus", Name = "UpdateStatus")]
-        public IActionResult UpdateStatus(string id_jadwal, int status)
+        [HttpPut("/UpdateStatusJadwal", Name = "UpdateStatusJadwal")]
+        public IActionResult UpdateStatusPetugasHarian(string id_jadwal, int newStatus)
         {
-            JadwalPetugasHarianModel jadwal = new JadwalPetugasHarianModel();
-
             try
             {
                 response.status = 200;
                 response.message = "Success";
-                _jadwalRepository.updateStatus(id_jadwal, status);
+                _jadwalRepository.updateStatus(id_jadwal, newStatus);
             }
             catch (Exception ex)
             {
