@@ -74,7 +74,41 @@ namespace Shafa_Al_Firdaus_API.Models
             }
             return petugasModel;
         }
+        public string autoId()
+        {
+            string newId = "";
+            string lastId = "";
+            try
+            {
+                string query = "SELECT TOP 1 kode FROM petugas_harian ORDER BY kode DESC";
+                SqlCommand command = new SqlCommand(query, _connection);
+                _connection.Open();
 
+                SqlDataReader reader = command.ExecuteReader();
+                
+                if (reader.Read())
+                {
+                    lastId = reader["kode"].ToString();
+                   
+                    int numId = int.Parse(lastId.Substring(4, 6)) + 1;
+                    
+                    newId = "PTGS" + numId.ToString("D6");
+                    
+                    return newId;
+                }
+                else
+                {
+                    newId = "PTGS000001";
+                    
+                    return newId;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return newId;
+        }
         public void insertData(PetugasHarianModel petugasHarianModel)
         {
             try
@@ -118,13 +152,15 @@ namespace Shafa_Al_Firdaus_API.Models
             }
         }
 
-        public void deleteData(string kode)
+        public void updateStatus(string kode, int newStatus)
         {
             try
             {
-                string query = "DELETE FROM petugas_harian WHERE kode = @p1";
+                string query = "UPDATE petugas_harian SET status = @p2 WHERE kode = @p1";
+
                 using SqlCommand command = new SqlCommand(query, _connection);
                 command.Parameters.AddWithValue("@p1", kode);
+                command.Parameters.AddWithValue("@p2", newStatus);
 
                 _connection.Open();
                 command.ExecuteNonQuery();

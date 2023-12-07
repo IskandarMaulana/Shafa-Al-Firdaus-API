@@ -49,6 +49,22 @@ namespace Shafa_Al_Firdaus_API.Controllers
             }
             return Ok(response);
         }
+        [HttpGet("/GetIdPetugasHarian", Name = "GetIdPetugasHarian")]
+        public IActionResult GetIdPetugasHarian()
+        {
+            try
+            {
+                response.status = 200;
+                response.message = "Success";
+                response.data = _petugasrepository.autoId();
+            }
+            catch (Exception ex)
+            {
+                response.status = 500;
+                response.message = "Failed " + ex.Message.ToString();
+            }
+            return Ok(response);
+        }
         [HttpPost("/InsertPetugasHarian", Name = "InsertPetugasHarian")]
         public IActionResult InsertPetugasHarian([FromBody] PetugasHarianModel petugasHarianModel)
         {
@@ -66,7 +82,7 @@ namespace Shafa_Al_Firdaus_API.Controllers
             return Ok(response);
         }
         [HttpPut("/UpdatePetugasHarian", Name = "UpdatePetugasHarian")]
-        public IActionResult UpdateDkm([FromBody] PetugasHarianModel petugasHarianModel)
+        public IActionResult UpdatePetugasHarian([FromBody] PetugasHarianModel petugasHarianModel)
         {
             PetugasHarianModel petugas = new PetugasHarianModel();
 
@@ -88,14 +104,14 @@ namespace Shafa_Al_Firdaus_API.Controllers
             }
             return Ok(response);
         }
-        [HttpDelete("/DeletePetugasHarian", Name = "DeletePetugasHarian")]
-        public IActionResult DeletePetugasHarian(string kode)
+        [HttpPatch("/UpdateStatusPetugasHarian", Name = "UpdateStatusPetugasHarian")]
+        public IActionResult UpdateStatusPetugasHarian(string kode, int newStatus)
         {
             try
             {
                 response.status = 200;
                 response.message = "Success";
-                _petugasrepository.deleteData(kode);
+                _petugasrepository.updateStatus(kode, newStatus);
             }
             catch (Exception ex)
             {
@@ -104,5 +120,6 @@ namespace Shafa_Al_Firdaus_API.Controllers
             }
             return Ok(response);
         }
+
     }
 }
