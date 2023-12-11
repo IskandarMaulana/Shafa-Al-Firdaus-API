@@ -74,7 +74,7 @@ namespace Shafa_Al_Firdaus_API.Controllers
         [HttpPut("/UpdateStatus", Name = "UpdateStatus")]
         public IActionResult UpdateStatus(string id_jadwal, int status)
         {
-            JadwalPetugasHarianModel jadwal = new JadwalPetugasHarianModel();
+            //JadwalPetugasHarianModel jadwal = new JadwalPetugasHarianModel();
 
             try
             {
