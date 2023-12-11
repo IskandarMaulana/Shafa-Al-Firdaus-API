@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PRG4_M7_P1_112.Models;
 using Shafa_Al_Firdaus_API.Models;
 
 namespace Shafa_Al_Firdaus_API.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class DkmController : Controller
