@@ -50,15 +50,15 @@ namespace Shafa_Al_Firdaus_API.Controllers
             return Ok(response);
         }
         [HttpPost("/InsertPengumuman", Name = "InsertPengumuman")]
-        public IActionResult InsertPengumuman([FromBody] PengumumanModel jadwalPetugasHarianModel)
+        public IActionResult InsertPengumuman([FromBody] PengumumanModel pengumumanModel)
         {
             try
             {
                 response.status = 200;
                 response.message = "Success";
 
-                jadwalPetugasHarianModel.id_pengumuman = Guid.NewGuid();
-                _pengumumanRepository.insertData(jadwalPetugasHarianModel);
+                pengumumanModel.id_pengumuman = Guid.NewGuid();
+                _pengumumanRepository.insertData(pengumumanModel);
             }
             catch (Exception ex)
             {

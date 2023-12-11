@@ -22,12 +22,12 @@ namespace Shafa_Al_Firdaus_API.Models
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd HH:mm}")]
         [DataType(DataType.DateTime, ErrorMessage = "Format tanggal tidak valid.")]
         [Range(typeof(DateTime), "2000-01-01", "9999-12-31", ErrorMessage = "Tanggal Mulai harus berada di antara 2000-01-01 dan 9999-12-31.")]
-        public DateTime tanggal_mulai { get; set; }
+        public DateTime tanggal_mulai { get; set; } = DateTime.Now;
 
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd HH:mm}")]
         [DataType(DataType.DateTime, ErrorMessage = "Format tanggal tidak valid.")]
         [Range(typeof(DateTime), "2000-01-01", "9999-12-31", ErrorMessage = "Tanggal Selesai harus berada di antara 2000-01-01 dan 9999-12-31.")]
-        public DateTime tanggal_selesai { get; set; }
+        public DateTime tanggal_selesai { get; set; } = DateTime.Now;
 
         [Required(ErrorMessage = "Status Pengumuman wajib diisi.")]
         [Range(0, 3, ErrorMessage = "Status Pengumuman hanya bisa Tayang, Tidak Tayang, Dijadwalkan atau Berakhir.")]
