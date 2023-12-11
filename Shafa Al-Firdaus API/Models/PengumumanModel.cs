@@ -19,13 +19,11 @@ namespace Shafa_Al_Firdaus_API.Models
         [MaxLength(300, ErrorMessage = "Isi Pengumuman maksimal 300 karakter.")]
         public string isi { get; set; }
 
-        [Required(ErrorMessage = "Tanggal Mulai wajib diisi.")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd HH:mm}")]
         [DataType(DataType.DateTime, ErrorMessage = "Format tanggal tidak valid.")]
         [Range(typeof(DateTime), "2000-01-01", "9999-12-31", ErrorMessage = "Tanggal Mulai harus berada di antara 2000-01-01 dan 9999-12-31.")]
         public DateTime tanggal_mulai { get; set; }
 
-        [Required(ErrorMessage = "Tanggal Selesai wajib diisi.")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd HH:mm}")]
         [DataType(DataType.DateTime, ErrorMessage = "Format tanggal tidak valid.")]
         [Range(typeof(DateTime), "2000-01-01", "9999-12-31", ErrorMessage = "Tanggal Selesai harus berada di antara 2000-01-01 dan 9999-12-31.")]
