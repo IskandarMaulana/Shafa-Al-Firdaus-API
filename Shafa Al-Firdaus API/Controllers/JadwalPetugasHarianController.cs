@@ -91,7 +91,7 @@ namespace Shafa_Al_Firdaus_API.Controllers
         }
 
         [HttpPut("/UpdateJadwalPetugasHarian", Name = "UpdateJadwalPetugasHarian")]
-        public IActionResult UpdateDkm([FromBody] JadwalPetugasHarianModel jadwalPetugasHarianModel)
+        public IActionResult UpdateJadwalPetugasHarian([FromBody] JadwalPetugasHarianModel jadwalPetugasHarianModel)
         {
             JadwalPetugasHarianModel jadwal = new JadwalPetugasHarianModel();
 
