@@ -1,11 +1,11 @@
 ﻿using Shafa_Al_Firdaus_API.Context;
+using Shafa_Al_Firdaus_API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using Shafa_Al_Firdaus_API.Models;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 
 namespace InventoryWebAPI.Controllers
 {
+
     [Route("api/token")]
     [ApiController]
     public class TokenController : ControllerBase
