@@ -12,7 +12,7 @@ namespace Shafa_Al_Firdaus_API.Models
         public string judul { get; set; }
 
         [Required(ErrorMessage = "Jenis Pengumuman wajib diisi.")]
-        [Range(0, 2, ErrorMessage = "Jenis Pengumuman hanya bisa Kegiatan, Pemberitahuan, atau Teks Berjalan.")]
+        [Range(0, 3, ErrorMessage = "Jenis Pengumuman hanya bisa Kegiatan, Pemberitahuan, Pemberitahuan Jum'at, atau Teks Berjalan.")]
         public int jenis { get; set; }
 
         [Required(ErrorMessage = "Isi Pengumuman wajib diisi.")]

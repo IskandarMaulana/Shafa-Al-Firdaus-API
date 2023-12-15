@@ -1,4 +1,8 @@
-﻿using System.Data.SqlClient;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
+using System.Data.SqlClient;
+using System.Threading.Tasks;
+
 
 namespace Shafa_Al_Firdaus_API.Models
 {
@@ -13,6 +17,21 @@ namespace Shafa_Al_Firdaus_API.Models
             _connectionString = configuration.GetConnectionString("DefaultConnection");
 
             _connection = new SqlConnection(_connectionString);
+
+        }
+
+        public void Validate(object model)
+        {
+            string errorMessage = "";
+            List<ValidationResult> results = new List<ValidationResult>();
+            ValidationContext context = new ValidationContext(model);
+            bool isValid = Validator.TryValidateObject(model, context, results, true);
+            if (isValid == false)
+            {
+                foreach (var item in results)
+                    errorMessage += "- " + item.ErrorMessage + "\n";
+                throw new Exception(errorMessage);
+            }
         }
 
         public List<PengumumanModel> getAllData()
@@ -86,7 +105,10 @@ namespace Shafa_Al_Firdaus_API.Models
         {
             try
             {
-                string query = "INSERT INTO pengumuman VALUES (@p1, @p2, @p3, @p4, @p5, @p6, @7)";
+
+                Validate(pengumumanModel);
+
+                string query = "INSERT INTO pengumuman VALUES (@p1, @p2, @p3, @p4, @p5, @p6, @p7)";
                 SqlCommand command = new SqlCommand(query, _connection);
                 command.Parameters.AddWithValue("@p1", pengumumanModel.id_pengumuman);
                 command.Parameters.AddWithValue("@p2", pengumumanModel.judul);
@@ -148,5 +170,45 @@ namespace Shafa_Al_Firdaus_API.Models
                 Console.WriteLine(e.Message);
             }
         }
+
+        public void updateStatus(string id_pengumuman, int newStatus)
+        {
+            try
+            {
+                string query = "UPDATE pengumuman SET status = @p2 WHERE id_pengumuman = @p1";
+
+                using SqlCommand command = new SqlCommand(query, _connection);
+                command.Parameters.AddWithValue("@p1", id_pengumuman);
+                command.Parameters.AddWithValue("@p2", newStatus);
+
+                _connection.Open();
+                command.ExecuteNonQuery();
+                _connection.Close();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+        public void updateStatusselesai(string id_pengumuman, int newStatus)
+        {
+            try
+            {
+                string query = "UPDATE pengumuman SET status = @p2 WHERE id_pengumuman = @p1";
+
+                using SqlCommand command = new SqlCommand(query, _connection);
+                command.Parameters.AddWithValue("@p1", id_pengumuman);
+                command.Parameters.AddWithValue("@p2", newStatus);
+
+                _connection.Open();
+                command.ExecuteNonQuery();
+                _connection.Close();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+
     }
 }

@@ -58,8 +58,8 @@ namespace Shafa_Al_Firdaus_API.Controllers
             {
                 response.status = 200;
                 response.message = "Success";
-
                 pengumumanModel.id_pengumuman = Guid.NewGuid();
+                response.data = pengumumanModel;
                 _pengumumanRepository.insertData(pengumumanModel);
             }
             catch (Exception ex)
@@ -111,5 +111,38 @@ namespace Shafa_Al_Firdaus_API.Controllers
             }
             return Ok(response);
         }
+        [HttpPatch("/UpdateStatusPengumuman", Name = "UpdateStatusPengumuman")]
+        public IActionResult UpdateStatusPengumuman(string id_pengumuman, int newStatus)
+        {
+            try
+            {
+                response.status = 200;
+                response.message = "Success";
+                _pengumumanRepository.updateStatus(id_pengumuman, newStatus);
+            }
+            catch (Exception ex)
+            {
+                response.status = 500;
+                response.message = "Failed " + ex.Message.ToString();
+            }
+            return Ok(response);
+        }
+        [HttpPatch("/UpdateStatusPengumumanSelesai", Name = "UpdateStatusPengumumanSelesai")]
+        public IActionResult UpdateStatusPengumumanSelesai(string id_pengumuman, int newStatus)
+        {
+            try
+            {
+                response.status = 200;
+                response.message = "Success";
+                _pengumumanRepository.updateStatusselesai(id_pengumuman, newStatus);
+            }
+            catch (Exception ex)
+            {
+                response.status = 500;
+                response.message = "Failed " + ex.Message.ToString();
+            }
+            return Ok(response);
+        }
     }
 }
+
