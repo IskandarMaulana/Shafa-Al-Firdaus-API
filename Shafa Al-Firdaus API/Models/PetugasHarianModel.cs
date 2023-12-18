@@ -4,6 +4,7 @@ namespace Shafa_Al_Firdaus_API.Models
 {
     public class PetugasHarianModel
     {
+        [Key]
         [Required(ErrorMessage = "Kode Petugas wajib diisi.")]
         [MaxLength(10, ErrorMessage = "Kode maksimal 10 karakter.")]
         [RegularExpression("^PTGS[0-9]{6}$", ErrorMessage = "Format Kode Petugas tidak valid.")]

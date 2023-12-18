@@ -4,6 +4,7 @@ namespace Shafa_Al_Firdaus_API.Models
 {
     public class JadwalPetugasHarianModel
     {
+        [Key]
         [Required(ErrorMessage = "ID Jadwal wajib diisi.")]
         public Guid id_jadwal { get; set; }
 

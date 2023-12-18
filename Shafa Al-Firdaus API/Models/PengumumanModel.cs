@@ -4,11 +4,12 @@ namespace Shafa_Al_Firdaus_API.Models
 {
     public class PengumumanModel
     {
+        [Key]
         [Required(ErrorMessage = "ID Pengumuman wajib diisi.")]
         public Guid id_pengumuman{ get; set; }
 
-        [Required(ErrorMessage = "Kode Petugas wajib diisi.")]
-        [MaxLength(50, ErrorMessage = "Kode maksimal 50 karakter.")] 
+        [Required(ErrorMessage = "Judul Pengumuman wajib diisi.")]
+        [MaxLength(50, ErrorMessage = "Judul Pengumuman maksimal 50 karakter.")] 
         public string judul { get; set; }
 
         [Required(ErrorMessage = "Jenis Pengumuman wajib diisi.")]
