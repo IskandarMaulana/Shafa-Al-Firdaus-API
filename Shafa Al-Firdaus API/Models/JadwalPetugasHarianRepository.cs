@@ -21,7 +21,7 @@ namespace Shafa_Al_Firdaus_API.Models
 
             try
             {
-                string query = "SELECT * FROM jadwal_petugas_harian";
+                string query = "Select * from jadwal_petugas_harian jph join petugas_harian ph on jph.kode = ph.kode";
                 SqlCommand command = new SqlCommand(query, _connection);
                 _connection.Open();
 
@@ -31,7 +31,7 @@ namespace Shafa_Al_Firdaus_API.Models
                     JadwalPetugasHarianModel petugas = new JadwalPetugasHarianModel
                     {
                         id_jadwal = Guid.Parse(reader["id_jadwal"].ToString()),
-                        kode = reader["kode"].ToString(),
+                        kode = reader["nama"].ToString(),
                         tanggal = Convert.ToDateTime(reader["tanggal"].ToString()),
                         waktu = reader["waktu"].ToString(),
                         tugas = reader["tugas"].ToString(),
