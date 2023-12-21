@@ -87,8 +87,8 @@ namespace Shafa_Al_Firdaus_API.Models
                 pengumumanModel.judul = reader["judul"].ToString();
                 pengumumanModel.jenis = Convert.ToInt32(reader["jenis"].ToString());
                 pengumumanModel.isi = reader["isi"].ToString();
-                pengumumanModel.tanggal_mulai = Convert.ToDateTime(reader["tanggal_mulai"].ToString()).Date;
-                pengumumanModel.tanggal_selesai = Convert.ToDateTime(reader["tanggal_selesai"].ToString()).Date;
+                pengumumanModel.tanggal_mulai = Convert.ToDateTime(reader["tanggal_mulai"].ToString());
+                pengumumanModel.tanggal_selesai = Convert.ToDateTime(reader["tanggal_selesai"].ToString());
                 pengumumanModel.status = Convert.ToInt32(reader["status"].ToString());
 
                 reader.Close();
