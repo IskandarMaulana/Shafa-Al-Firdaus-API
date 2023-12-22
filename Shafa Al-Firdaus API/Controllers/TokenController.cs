@@ -32,12 +32,12 @@ namespace InventoryWebAPI.Controllers
 
         [HttpPost("submit")]
 
-        public async Task<IActionResult> Post([FromBody] DkmModel _userData)
+        public async Task<IActionResult> Post([FromBody] LoginViewModel _userData)
         {
 
-            if (_userData != null && _userData.username != null && _userData.password != null)
+            if (_userData != null && _userData.Username != null && _userData.Password != null)
             {
-                var user = await GetUser(_userData.username, _userData.password);
+                var user = await GetUser(_userData.Username, _userData.Password);
 
                 if (user != null)
                 {
