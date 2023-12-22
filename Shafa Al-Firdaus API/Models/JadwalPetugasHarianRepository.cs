@@ -1,4 +1,5 @@
-﻿using System.Data.SqlClient;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.Data.SqlClient;
 
 namespace Shafa_Al_Firdaus_API.Models
 {
@@ -15,13 +16,47 @@ namespace Shafa_Al_Firdaus_API.Models
             _connection = new SqlConnection(_connectionString);
         }
 
+        /*------------------------- View Jadwal Petugas Harian ---------------------*/
+        public List<JadwalPetugasHarianViewModel> getAllView()
+        {
+            List<JadwalPetugasHarianViewModel> jadwalList = new List<JadwalPetugasHarianViewModel>();
+
+            try
+            {
+                string query = "SELECT * FROM jadwal_petugas_view ORDER BY tanggal ASC";
+                SqlCommand command = new SqlCommand(query, _connection);
+                _connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    JadwalPetugasHarianViewModel petugas = new JadwalPetugasHarianViewModel
+                    {
+                        tanggal = Convert.ToDateTime(reader["tanggal"].ToString()),
+                        nama = reader["nama"].ToString(),
+                        waktu = reader["waktu"].ToString(),
+                        tugas = reader["tugas"].ToString(),
+                        status = Convert.ToInt32(reader["status"].ToString())
+                    };
+                    jadwalList.Add(petugas);
+                }
+                reader.Close();
+                _connection.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return jadwalList;
+        }
+
         public List<JadwalPetugasHarianModel> getAllData()
         {
             List<JadwalPetugasHarianModel> jadwalList = new List<JadwalPetugasHarianModel>();
 
             try
             {
-                string query = "Select * from jadwal_petugas_harian jph join petugas_harian ph on jph.kode = ph.kode";
+                string query = "Select * from jadwal_petugas_harian jph join petugas_harian ph on jph.kode = ph.kode ORDER BY jph.tanggal ASC";
                 SqlCommand command = new SqlCommand(query, _connection);
                 _connection.Open();
 
