@@ -30,7 +30,8 @@ namespace Shafa_Al_Firdaus_API.Models
                     DkmModel anggota = new DkmModel
                     {
                         username = reader["username"].ToString(),
-                        password = reader["password"].ToString()
+                        password = reader["password"].ToString(),
+                        email = reader["email"].ToString()
                     };
                     anggotaList.Add(anggota);
                 }
@@ -59,6 +60,7 @@ namespace Shafa_Al_Firdaus_API.Models
                 
                 anggotaModel.username = reader["username"].ToString();
                 anggotaModel.password = reader["password"].ToString();
+                anggotaModel.email = reader["email"].ToString();
 
                 reader.Close();
                 _connection.Close();

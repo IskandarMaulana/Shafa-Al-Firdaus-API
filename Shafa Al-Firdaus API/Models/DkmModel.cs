@@ -14,5 +14,9 @@ namespace Shafa_Al_Firdaus_API.Models
         [Required(ErrorMessage = "Kata Sandi Wajib Diisi.")]
         [MaxLength(50, ErrorMessage = "Kata Sandi maksimal 50 karakter")]
         public string password { get; set; }
+
+        [Required(ErrorMessage = "Email Wajib Diisi.")]
+        [MaxLength(50, ErrorMessage = "Email maksimal 50 karakter")]
+        public string email { get; set; }
     }
 }
