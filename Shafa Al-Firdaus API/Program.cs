@@ -1,4 +1,5 @@
 using Shafa_Al_Firdaus_API.Context;
+using Shafa_Al_Firdaus_API.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;

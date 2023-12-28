@@ -2,6 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using PRG4_M7_P1_112.Models;
 using Shafa_Al_Firdaus_API.Models;
+using MailKit.Net.Smtp;
+using MimeKit;
+using MailKit.Security;
 
 namespace Shafa_Al_Firdaus_API.Controllers
 {
@@ -11,6 +14,8 @@ namespace Shafa_Al_Firdaus_API.Controllers
     public class DkmController : Controller
     {
         private readonly DkmRepository _dkmrepository;
+        
+
         ResponseModel response = new ResponseModel();
 
         public DkmController(IConfiguration configuration)
@@ -104,5 +109,61 @@ namespace Shafa_Al_Firdaus_API.Controllers
             }
             return Ok(response);
         }*/
+        [HttpPost("/SendOtp")]
+        public IActionResult SendOtp(string to, string otp)
+        {
+            try
+            {
+                const string subject = "Kode OTP untuk Verifikasi";
+                string body = $"Hi DKM!\n\nKode OTP Anda adalah: {otp}.\n\nMasukkan Kode ini untuk verifikasi mengubah Kata Sandi Anda.";
+
+                var message = new MimeMessage();
+                message.From.Add(new MailboxAddress("Iskandar Maulana", "0320220112@polytechnic.astra.ac.id"));
+                message.To.Add(new MailboxAddress("DKM Asy-Syabab", to));
+                message.Subject = subject;
+
+                var textPart = new TextPart("plain")
+                {
+                    Text = body
+                };
+
+                var multipart = new Multipart("mixed");
+                multipart.Add(textPart);
+
+                message.Body = multipart;
+
+                using (var client = new SmtpClient())
+                {
+                    client.Connect("smtp-mail.outlook.com", 587, SecureSocketOptions.StartTls);
+                    client.Authenticate("0320220112@polytechnic.astra.ac.id", "Vat44064");
+
+                    client.Send(message);
+                    client.Disconnect(true);
+                }
+                
+                /*var fromAddress = "mynameiskandar410@gmail.com";
+
+                const string fromPassword = "iskandar2468";
+
+                var client = new SmtpClient("smtp.gmail.com", 465)
+                {
+                    EnableSsl = true,
+                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                    UseDefaultCredentials = false,
+                    Credentials = new NetworkCredential(fromAddress, fromPassword)
+                };
+
+                var mailMessage = new MailMessage(from: fromAddress, to: to, subject, body);
+
+                client.Send(mailMessage);*/
+                //_emailService.SendEmail(to, subject, body);
+
+                return Ok(new { Message = "Email sent successfully." });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { Message = "Failed to send email.", Error = ex.Message });
+            }
+        }
     }
 }

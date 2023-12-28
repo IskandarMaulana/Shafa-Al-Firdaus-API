@@ -17,7 +17,7 @@ namespace Shafa_Al_Firdaus_API.Models
         }
 
         /*------------------------- View Jadwal Petugas Harian ---------------------*/
-        public List<JadwalPetugasHarianViewModel> getAllView()
+        public List<JadwalPetugasHarianViewModel> getAllJadwalPetugasView()
         {
             List<JadwalPetugasHarianViewModel> jadwalList = new List<JadwalPetugasHarianViewModel>();
 
@@ -48,6 +48,41 @@ namespace Shafa_Al_Firdaus_API.Models
                 Console.WriteLine(ex.Message);
             }
             return jadwalList;
+        }
+
+        /*------------------------- View Pengumuman Harian ---------------------*/
+        public List<PengumumanViewModel> getAllPengumumanView()
+        {
+            List<PengumumanViewModel> pengumumanList = new List<PengumumanViewModel>();
+
+            try
+            {
+                string query = "SELECT * FROM pengumuman_view ORDER BY tanggal_mulai ASC";
+                SqlCommand command = new SqlCommand(query, _connection);
+                _connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    PengumumanViewModel pengumuman = new PengumumanViewModel
+                    {
+                        judul = reader["judul"].ToString(),
+                        jenis = Convert.ToInt32(reader["jenis"].ToString()),
+                        isi = reader["isi"].ToString(),
+                        tanggal_mulai = Convert.ToDateTime(reader["tanggal_mulai"].ToString()),
+                        tanggal_selesai = Convert.ToDateTime(reader["tanggal_selesai"].ToString()),
+                        status = Convert.ToInt32(reader["status"].ToString())
+                    };
+                    pengumumanList.Add(pengumuman);
+                }
+                reader.Close();
+                _connection.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return pengumumanList;
         }
 
         public List<JadwalPetugasHarianModel> getAllData()
