@@ -85,9 +85,9 @@ namespace Shafa_Al_Firdaus_API.Models
             return pengumumanList;
         }
 
-        public List<JadwalPetugasHarianModel> getAllData()
+        public List<JadwalPetugasHarianJoinModel> getAllData()
         {
-            List<JadwalPetugasHarianModel> jadwalList = new List<JadwalPetugasHarianModel>();
+            List<JadwalPetugasHarianJoinModel> jadwalList = new List<JadwalPetugasHarianJoinModel>();
 
             try
             {
@@ -98,10 +98,11 @@ namespace Shafa_Al_Firdaus_API.Models
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    JadwalPetugasHarianModel petugas = new JadwalPetugasHarianModel
+                    JadwalPetugasHarianJoinModel petugas = new JadwalPetugasHarianJoinModel
                     {
                         id_jadwal = Guid.Parse(reader["id_jadwal"].ToString()),
-                        kode = reader["nama"].ToString(),
+                        kode = reader["kode"].ToString(),
+                        nama = reader["nama"].ToString(),
                         tanggal = Convert.ToDateTime(reader["tanggal"].ToString()),
                         waktu = reader["waktu"].ToString(),
                         tugas = reader["tugas"].ToString(),
