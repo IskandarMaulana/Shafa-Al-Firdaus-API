@@ -91,7 +91,7 @@ namespace Shafa_Al_Firdaus_API.Models
 
             try
             {
-                string query = "Select * from jadwal_petugas_harian jph join petugas_harian ph on jph.kode = ph.kode ORDER BY jph.tanggal ASC";
+                string query = "Select * from jadwal_petugas_harian jph join petugas_harian ph on jph.kode = ph.kode ORDER BY jph.tanggal DESC";
                 SqlCommand command = new SqlCommand(query, _connection);
                 _connection.Open();
 
