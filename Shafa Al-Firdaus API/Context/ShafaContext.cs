@@ -21,9 +21,5 @@ namespace Shafa_Al_Firdaus_API.Context
 
         public virtual DbSet<DkmModel> DkmModels { get; set; }
         public virtual DbSet<LoginViewModel> LoginViewModel { get; set; }
-
-
-
-
     }
 }
